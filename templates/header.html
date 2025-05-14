@@ -1,0 +1,125 @@
+
+<header id="header" class="header position-relative">
+    <div class="container-fluid container-xl position-relative">
+
+      <div class="top-row d-flex align-items-center justify-content-between">
+        <a href="/beranda" class="logo d-flex align-items-end">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.webp" alt=""> -->
+          <h1 class="sitename">KuKetik</h1><span>.</span>
+        </a>
+
+        <div class="d-flex align-items-center">
+          <div class="social-links">
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          </div>
+
+          <form class="search-form ms-4" method="POST" action="{% url 'result' %}">
+            {% csrf_token %}
+            <input type="text" name="search_parm" placeholder="Search..." class="form-control">
+            <button type="submit" class="btn"><i class="bi bi-search"></i></button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- <div class="nav-wrap">
+      <div class="container d-flex justify-content-center position-relative">
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            {% for link in menu %}
+                {% if link.is_parent == False and link.parent_id == 0 %}
+                <li ><a href="{{ link.url }}" >{{ link.name }}</a></li> 
+                {% endif %}
+                {% if link.is_parent == True %}
+                <li class="dropdown"><a href="#"><span>{{ link.name }}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>            
+                    <ul>
+                        {% for link_child in menu_child %}
+                        
+                            
+                        {% if link_child.parent_id == link.id  %}    
+                            <li><a href="about.html">{{ link_child }} </a></li>
+                        {% endif %}            
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+           
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div> -->
+    {% if user.is_authenticated %}
+    <div class="nav-wrap">
+      <div class="container d-flex justify-content-center position-relative">
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="">Artikel Ku</a></li>
+            <li><a href="/blog/add_blog">Tambah Artikel</a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="index.html">User : <strong> {{ user.username }}</strong></a></li>
+            <li><a href="/akun/log_out" style="color: red;">LOG OUT</a></li>
+            
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+    {% endif %}
+  </header>
+
+  <script type='text/javascript'>
+    cc = window.location.href
+    var pathArray = window.location.pathname.split( '/' );
+    let listItems = document.querySelectorAll('li a');
+    listItems.forEach((link) => {
+        url_db = link.getAttribute('href')
+        str_url = url_db.replace("/", "");
+        if(str_url == pathArray[1]){
+            link.classList.add('active');
+        }
+        
+    });
+    userAgent = navigator.userAgent;
+    console.log('User Agent:', userAgent);
+    function generateUserId() {
+        return 'user-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Simpan ID pengguna di LocalStorage
+    const userId = localStorage.getItem('userId') || generateUserId();
+    localStorage.setItem('userId', userId);
+    console.log('ID pengguna yang disimpan:', userId);
+    function mouse_move(e) {
+        let x = e.clientX;
+        let y = e.clientY;
+        console.log(x,y)
+
+    }
+
+    let startTime = Date.now();
+
+    window.addEventListener('beforeunload', () => {
+        let endTime = Date.now();
+        let timeSpent = endTime - startTime;  // waktu dalam milidetik
+        console.log('Waktu yang dihabiskan di halaman:', timeSpent / 1000, 'detik');
+    });
+
+    let scrollDepth = 0;
+    window.addEventListener('scroll', () => {
+        let scrollPosition = window.scrollY + window.innerHeight;
+        let pageHeight = document.documentElement.scrollHeight;
+        scrollDepth = (scrollPosition / pageHeight) * 100;  // persentase scroll
+        console.log('Persentase scroll:', scrollDepth.toFixed(2), '%');
+    });
+
+    document.addEventListener('click', (event) => {
+        let clickedElement = event.target;  // elemen yang diklik
+        console.log('Elemen yang diklik:', clickedElement);
+    });
+
+</script>

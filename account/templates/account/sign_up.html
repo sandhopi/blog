@@ -1,0 +1,176 @@
+{% load static %}
+{% load tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}"  rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  {% include 'snippets/css.html' %}
+  <style>
+    .wrn {
+        color:red
+    }
+    .sccs {
+        color: green;
+    }
+  </style>
+</head>
+
+<body class="index-page">
+
+    
+<header id="header" class="header position-relative">
+    <div class="container-fluid container-xl position-relative">
+
+      <div class="top-row d-flex align-items-center justify-content-between">
+        <a href="/beranda" class="logo d-flex align-items-end">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.webp" alt=""> -->
+          <h1 class="sitename">KuKetik</h1><span>.</span>
+        </a>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+        <!-- Page Title -->
+        <div class="page-title">
+          <div class="breadcrumbs">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="bi bi-house"></i> Beranda</a></li>
+                <li class="breadcrumb-item active current">Daftar</li>
+              </ol>
+            </nav>
+          </div>
+        </div><!-- End Page Title -->
+    
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">                
+                    <section id="blog-comment-form" class="blog-comment-form section">
+                        <div class="container" data-aos="fade-up" data-aos-delay="100">
+                            {% if messages %}
+                            <div class="alert-container">
+                              {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">
+                                  {{ message }}
+                                </div>
+                              {% endfor %}
+                            </div>
+                            {% endif %}
+            
+                          <form method="post" role="form">
+                            {% csrf_token %}
+                            <div class="section-header">
+                              <h3>Tambah User</h3>
+                              <p>Untuk dapat berkontribusi, silakan daftar akun terlebih dahulu. Kami sangat menghargai partisipasi Anda.</p>
+                            </div>
+            
+                            <div class="row gy-3">
+                              <div class="col-md-6 form-group">
+                                <label for="name">User Name *</label>
+                                {{ formUp.username }}
+                            </div>
+                            
+                            <div class="col-md-6 form-group">
+                                <label for="email">Email Address *</label>
+                                {{ formUp.email }}
+                            </div>
+                            
+                            <div class="col-12 form-group">
+                                <label for="website">Password *</label>
+                                {{ formUp.password }}
+                            </div>
+                            
+                            <div class="col-12 form-group">
+                                <label for="comment">Konfirmasi Password *</label>
+                                {{ formUp.confirm_password }}
+                              </div>
+                              <p id="warning"></p>
+                              <div class="col-12 text-center">
+                                <button type="submit" class="btn-submit" id="btn_simpan">Simpan</button>
+                              </div>
+                            </div>
+            
+                          </form>
+            
+                        </div>
+            
+                      </section><!-- /Blog Comment Form Section -->
+                        
+            </div>
+          </div>
+        </div>
+    
+      </main>
+  
+
+  {% include 'footer.html' %}
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  {% include 'snippets/js.html' %}
+
+</body>
+
+</html>
+
+<script type='text/javascript'>
+    document.getElementById("btn_simpan").disabled = true;
+    let regexSimpleEmail = /@/;
+    function validateEmail(email_val,emailRegex){
+        if (emailRegex.test(email_val)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function check_mail() {
+        let mail = document.getElementById("id_email").value;
+        if (!validateEmail(mail,regexSimpleEmail || mail != '')){
+            document.getElementById("warning").innerText = 'Email tidak valid';
+            document.getElementById("warning").classList.add("wrn");
+            document.getElementById("btn_simpan").disabled = true
+        }else{
+            document.getElementById("warning").innerText = ''
+            document.getElementById("btn_simpan").disabled = false
+        }
+    }
+    function check() {
+        document.getElementById("warning").classList.remove('sccs','wrn')
+        
+        let pass = document.getElementById("id_password").value;
+        let c_pass = document.getElementById("id_confirm_password").value;
+        if(pass == c_pass && c_pass != '' ){
+            document.getElementById("btn_simpan").disabled = false;
+            document.getElementById("warning").innerText = 'Password cocok';
+            document.getElementById("warning").classList.add("sccs");
+        }
+        else if(pass == '' ){
+            document.getElementById("btn_simpan").disabled = true;
+            document.getElementById("warning").innerText = ''
+        }else{
+            document.getElementById("btn_simpan").disabled = true;
+            document.getElementById("warning").innerText = 'Password tidak cocok';
+            document.getElementById("warning").classList.add("wrn");
+        }
+    }
+
+</script>
+

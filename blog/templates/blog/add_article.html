@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Add Article</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}"  rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  {% include 'snippets/css.html' %}
+  <style>
+    .django-ckeditor-widget{
+        width: 100%;
+    }
+  </style>
+</head>
+
+<body class="index-page" onmousemove="mouse_move(event)">
+
+    {% include 'header.html' %}
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title">
+          <div class="breadcrumbs">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="bi bi-house"></i> Beranda</a></li>
+                <li class="breadcrumb-item"><a href="#">Blog</a></li>
+                <li class="breadcrumb-item active current">Tambah</li>
+              </ol>
+            </nav>
+          </div>
+    
+          <div class="title-wrapper">
+            <h1>Tambahkan Artikel</h1>
+            <p>Setiap perjalanan dimulai dengan langkah pertama, dan halaman ini akan membantu Anda untuk memulainya.</p>
+          </div>
+        </div><!-- End Page Title -->
+    
+        <div class="container">
+          <div class="row">
+    
+            <div class="col-lg-12">
+    
+              <!-- Blog Details Section -->
+              <section id="blog-details" class="blog-details section">
+                <div class="container" data-aos="fade-up">
+    
+                  <article class="article">
+                  {% if messages %}
+                  <div class="alert-container">
+                    {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.as_p }}
+                    
+                        <button type="submit"  class="btn btn-success btn-block">Save</button>
+                    </form>
+                        
+                    
+                   
+    
+                  </article>
+    
+                </div>
+              </section><!-- /Blog Details Section -->
+            </div>
+          </div>
+        </div>
+    
+      </main>
+      {% include 'footer.html' %}
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  {% include 'snippets/js.html' %}
+
+</body>
+
+</html>
+

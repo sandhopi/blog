@@ -1,0 +1,53 @@
+<footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">KuKetik</span><span>.</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Bekasi,</p>
+            <p>Indonesia</p>
+            <p><strong>Email:</strong> <span>cr@kuketik.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Kontribusi</h4>
+          <ul>
+            {% if user.is_authenticated %}
+              <li><a href="#">User Login : {{ user.username }}</a></li>
+              <li><a href="">Artikel Ku</a></li>
+              <li><a href="/blog/add_blog">Tambah Artikel</a></li>
+            {% else %}
+              <li><a href="/akun/masuk">Masuk</a></li>
+              <li><a href="/akun/daftar">Daftar</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Layanan</h4>
+          <ul>
+            <li><a href="#">Mobile Development</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Database</a></li>
+            <li><a href="#">Web/Mobile Machine learning</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <!-- <p>© <span>Copyright</span> <strong class="px-1 sitename">Blogy</strong> <span>All Rights Reserved</span></p> -->
+      <div class="credits">
+        Develop by <a href="">KuKetik Founder</a>
+      </div>
+    </div>
+
+  </footer>

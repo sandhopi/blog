@@ -1,0 +1,79 @@
+{% load static %}
+{% load tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}"  rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  {% include 'snippets/css.html' %}
+
+</head>
+
+<body class="index-page">
+
+    
+<header id="header" class="header position-relative">
+    <div class="container-fluid container-xl position-relative">
+
+      <div class="top-row d-flex align-items-center justify-content-between">
+        <a href="/beranda" class="logo d-flex align-items-end">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.webp" alt=""> -->
+          <h1 class="sitename">KuKetik</h1><span>.</span>
+        </a>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+        <!-- Page Title -->
+        <div class="page-title">
+          <div class="breadcrumbs">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="bi bi-house"></i> Beranda</a></li>
+                <li class="breadcrumb-item active current">Aktivasi Sukses</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="title-wrapper">
+            <h1>Berhasil Aktivasi</h1>
+            <p>
+              {% if messages %}
+              <div class="alert-container">
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </p>
+          </div>
+        </div><!-- End Page Title -->
+      </main>
+  
+
+  {% include 'footer.html' %}
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  {% include 'snippets/js.html' %}
+
+</body>
+
+</html>
+

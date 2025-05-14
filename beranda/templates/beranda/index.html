@@ -1,0 +1,341 @@
+{% load static %}
+{% load tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}"  rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  {% include 'snippets/css.html' %}
+  
+</head>
+
+<body class="index-page" onmousemove="mouse_move(event)">
+
+    {% include 'header.html' %}
+  <main class="main">
+
+    <!-- Blog Hero Section -->
+    <section id="blog-hero" class="blog-hero section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="blog-grid">
+
+          <!-- Featured Post (Large) -->
+         
+          <article class="blog-item featured" data-aos="fade-up">
+            <img src="/media/{{ new_content.image }}" alt="Blog Image" class="img-fluid">
+            <div class="blog-content">
+              <div class="post-meta">
+                <span class="date">{{ new_content.created }}</span>
+                <span class="category">{{ new_content.category }}</span>
+              </div>
+              <h2 class="post-title">
+                <a href="/blog/{{ new_content.id | encode }}" title="{{ new_content }}">{{ new_content }}</a>
+              </h2>
+            </div>
+          </article><!-- End Featured Post -->
+
+          <!-- Regular Posts -->
+          <article class="blog-item" data-aos="fade-up" data-aos-delay="100">
+            <img src="/media/{{ second_content.image }} " alt="Blog Image" class="img-fluid">
+            <div class="blog-content">
+              <div class="post-meta">
+                <span class="date">{{ second_content.created }}</span>
+                <span class="category">{{ second_content.category }}</span>
+              </div>
+              <h3 class="post-title">
+                <a href="/blog/{{ second_content.id | encode }}" title="{{ second_content }}">{{ second_content }}</a>
+              </h3>
+            </div>
+          </article><!-- End Blog Item -->
+
+          <article class="blog-item" data-aos="fade-up" data-aos-delay="200">
+            <img src="/media/{{ content_3.image }} " alt="Blog Image" class="img-fluid">
+            <div class="blog-content">
+              <div class="post-meta">
+                <span class="date">{{ content_3.created }}</span>
+                <span class="category">{{ content_3.category }}</span>
+              </div>
+              <h3 class="post-title">
+                <a href="/blog/{{ content_3.id | encode }}" title="{{ content_3 }}">{{ content_3 }}</a>
+              </h3>
+            </div>
+          </article><!-- End Blog Item -->
+
+          <article class="blog-item" data-aos="fade-up" data-aos-delay="300">
+            <img src="/media/{{ content_4.image }} " alt="Blog Image" class="img-fluid">
+            <div class="blog-content">
+              <div class="post-meta">
+                <span class="date">{{ content_4.created }}</span>
+                <span class="category">{{ content_4.category }}</span>
+              </div>
+              <h3 class="post-title">
+                <a href="/blog/{{ content_4.id | encode }}" title="{{ content_3 }}">{{ content_4 }}</a>
+              </h3>
+            </div>
+          </article><!-- End Blog Item -->
+
+          <article class="blog-item" data-aos="fade-up" data-aos-delay="400">
+            <img src=" {% static 'assets/img/blog/blog-post-6.webp' %} " alt="Blog Image" class="img-fluid">
+            <div class="blog-content">
+              <div class="post-meta">
+                <span class="date">{{ content_5.created }}</span>
+                <span class="category">{{ content_5.category }}</span>
+              </div>
+              <h3 class="post-title">
+                <a href="/blog/{{ content_5.id | encode }}" title="{{ content_5 }}">{{ content_5 }}</a>
+              </h3>
+            </div>
+          </article><!-- End Blog Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Blog Hero Section -->
+
+    <!-- Featured Posts Section -->
+    <section id="featured-posts" class="featured-posts section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Ketikan Populer</h2>
+        <div><span>Check Our</span> <span class="description-title">Populer Articles</span></div>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="blog-posts-slider swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 800,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": 3,
+              "spaceBetween": 30,
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 20
+                },
+                "768": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 20
+                },
+                "1200": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 30
+                }
+              }
+            }
+          </script>
+
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="blog-post-item">
+                <img src=" {% static 'assets/img/blog/blog-post-portrait-1.webp' %} " alt="Blog Image">
+                <div class="blog-post-content">
+                  <div class="post-meta">
+                    <span><i class="bi bi-person"></i> Julia Parker</span>
+                    <span><i class="bi bi-clock"></i> Jan 15, 2025</span>
+                    <span><i class="bi bi-chat-dots"></i> 6 Comments</span>
+                  </div>
+                  <h2><a href="#">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</a></h2>
+                  <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce porttitor metus eget lectus consequat, sit amet feugiat magna vulputate.</p>
+                  <a href="#" class="read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div><!-- End slide item -->
+
+            <div class="swiper-slide">
+              <div class="blog-post-item">
+                <img src="{% static 'assets/img/blog/blog-post-portrait-2.webp' %} " alt="Blog Image">
+                <div class="blog-post-content">
+                  <div class="post-meta">
+                    <span><i class="bi bi-person"></i> Mark Wilson</span>
+                    <span><i class="bi bi-clock"></i> Jan 18, 2025</span>
+                    <span><i class="bi bi-chat-dots"></i> 6 Comments</span>
+                  </div>
+                  <h2><a href="#">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</a></h2>
+                  <p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit amet adipiscing sem neque sed ipsum.</p>
+                  <a href="#" class="read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div><!-- End slide item -->
+
+            <div class="swiper-slide">
+              <div class="blog-post-item">
+                <img src="{% static 'assets/img/blog/blog-post-portrait-3.webp' %} " alt="Blog Image">
+                <div class="blog-post-content">
+                  <div class="post-meta">
+                    <span><i class="bi bi-person"></i> Sarah Johnson</span>
+                    <span><i class="bi bi-clock"></i> Jan 21, 2025</span>
+                    <span><i class="bi bi-chat-dots"></i> 15 Comments</span>
+                  </div>
+                  <h2><a href="#">At vero eos et accusamus et iusto odio dignissimos ducimus</a></h2>
+                  <p>Nullam dictum felis eu pede mollis pretium integer tincidunt cras dapibus vivamus elementum semper nisi.</p>
+                  <a href="#" class="read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div><!-- End slide item -->
+
+            <div class="swiper-slide">
+              <div class="blog-post-item">
+                <img src="{% static 'assets/img/blog/blog-post-portrait-4.webp' %} " alt="Blog Image">
+                <div class="blog-post-content">
+                  <div class="post-meta">
+                    <span><i class="bi bi-person"></i> David Brown</span>
+                    <span><i class="bi bi-clock"></i> Jan 24, 2025</span>
+                    <span><i class="bi bi-chat-dots"></i> 10 Comments</span>
+                  </div>
+                  <h2><a href="#">Et harum quidem rerum facilis est et expedita distinctio</a></h2>
+                  <p>Donec quam felis ultricies nec pellentesque eu pretium quis sem nulla consequat massa quis enim.</p>
+                  <a href="#" class="read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div><!-- End slide item -->
+
+            <div class="swiper-slide">
+              <div class="blog-post-item">
+                <img src="{% static 'assets/img/blog/blog-post-portrait-5.webp' %} " alt="Blog Image">
+                <div class="blog-post-content">
+                  <div class="post-meta">
+                    <span><i class="bi bi-person"></i> Emma Davis</span>
+                    <span><i class="bi bi-clock"></i> Jan 27, 2025</span>
+                    <span><i class="bi bi-chat-dots"></i> 6 Comments</span>
+                  </div>
+                  <h2><a href="#">Nam libero tempore, cum soluta nobis est eligendi optio</a></h2>
+                  <p>Aenean leo ligula porttitor eu consequat vitae eleifend ac enim aliquam lorem ante dapibus in viverra.</p>
+                  <a href="#" class="read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div><!-- End slide item -->
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Featured Posts Section -->
+
+    <!-- Category Section Section -->
+    <section id="category-section" class="category-section section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Ketikan Category</h2>
+        <div> <span class="description-title">Category Section</span></div>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <!-- Featured Posts -->
+        <div class="row gy-4 mb-4">
+          {% for cat_item in kategori_post  %}
+          
+          <div class="col-lg-4">
+            <article class="featured-post">
+              <div class="post-img">
+                <img src="{% static 'assets/img/blog/blog-post-6.webp' %}"  alt="" class="img-fluid" loading="lazy">
+              </div>
+              <div class="post-content">
+                <div class="category-meta">
+                  <span class="post-category">{{ cat_item.category }}</span>
+                  <div class="author-meta">
+                    <img src="assets/img/person/person-f-13.webp" alt="" class="author-img">
+                    <span class="author-name">{{ cat_item.author }}</span>
+                    <span class="post-date">28 April 2024</span>
+                  </div>
+                </div>
+                <h2 class="title">
+                  <a href="blog-details.html">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</a>
+                </h2>
+              </div>
+            </article>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- List Posts -->
+        <div class="row">
+          {% for cat_item_4 in kategori_post_4all  %}
+          <div class="col-xl-4 col-lg-6">
+            <article class="list-post">
+              <div class="post-img">
+                <img src="assets/img/blog/blog-post-6.webp" alt="" class="img-fluid" loading="lazy">
+              </div>
+              <div class="post-content">
+                <div class="category-meta">
+                  <span class="post-category">{{ cat_item_4.category }}</span>
+                </div>
+                <h3 class="title">
+                  <a href="blog-details.html">Quis autem vel eum iure reprehenderit qui in ea voluptate</a>
+                </h3>
+                <div class="post-meta">
+                  <span class="read-time">2 mins read</span>
+                  <span class="post-date">6 April 2026</span>
+                </div>
+              </div>
+            </article>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </section><!-- /Category Section Section -->
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4 justify-content-between align-items-center">
+          <div class="col-lg-6">
+            <div class="cta-content" data-aos="fade-up" data-aos-delay="200">
+              <h2>Subscribe to our newsletter</h2>
+              <p>Proin eget tortor risus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam id dui posuere blandit.</p>
+              <form action="forms/newsletter.php" method="post" class="php-email-form cta-form" data-aos="fade-up" data-aos-delay="300">
+                <div class="input-group mb-3">
+                  <input type="email" class="form-control" placeholder="Email address..." aria-label="Email address" aria-describedby="button-subscribe">
+                  <button class="btn btn-primary" type="submit" id="button-subscribe">Subscribe</button>
+                </div>
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="cta-image" data-aos="zoom-out" data-aos-delay="200">
+              <img src="assets/img/cta/cta-1.webp" alt="" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Call To Action Section -->
+
+  </main>
+
+  {% include 'footer.html' %}
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  {% include 'snippets/js.html' %}
+
+</body>
+
+</html>
+
