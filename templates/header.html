@@ -85,7 +85,6 @@
         
     });
     userAgent = navigator.userAgent;
-    console.log('User Agent:', userAgent);
     function generateUserId() {
         return 'user-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
     }
@@ -93,33 +92,70 @@
     // Simpan ID pengguna di LocalStorage
     const userId = localStorage.getItem('userId') || generateUserId();
     localStorage.setItem('userId', userId);
-    console.log('ID pengguna yang disimpan:', userId);
+    
     function mouse_move(e) {
         let x = e.clientX;
         let y = e.clientY;
-        console.log(x,y)
+        // console.log(x,y)
 
     }
 
     let startTime = Date.now();
-
-    window.addEventListener('beforeunload', () => {
-        let endTime = Date.now();
-        let timeSpent = endTime - startTime;  // waktu dalam milidetik
-        console.log('Waktu yang dihabiskan di halaman:', timeSpent / 1000, 'detik');
-    });
-
     let scrollDepth = 0;
+    scr_arr = []
     window.addEventListener('scroll', () => {
         let scrollPosition = window.scrollY + window.innerHeight;
         let pageHeight = document.documentElement.scrollHeight;
         scrollDepth = (scrollPosition / pageHeight) * 100;  // persentase scroll
-        console.log('Persentase scroll:', scrollDepth.toFixed(2), '%');
+        scr_arr.push(scrollDepth);
     });
-
+    let pos = 0 
+    window.addEventListener('beforeunload', () => {
+          let endTime = Date.now();
+          let timeSpent = endTime - startTime;  // waktu dalam milidetik
+          let ur = String(window.location.href)
+          pos = String(Math.max(...scr_arr))
+          const data_l = {
+            url       : String(window.location.href),
+            scroll_pos: String(Math.max(...scr_arr).toFixed(2)),
+            el_click  : 'href',
+            user_id   : userId,
+            used_time : timeSpent / 1000,
+            user_agent : userAgent
+          };
+          navigator.sendBeacon("/blog/add/perfom", JSON.stringify(data_l));
+          
+        });
+    
     document.addEventListener('click', (event) => {
         let clickedElement = event.target;  // elemen yang diklik
-        console.log('Elemen yang diklik:', clickedElement);
+        
+        const data = {
+          url       : String(window.location.href),
+          scroll_pos: String(Math.max(...scr_arr).toFixed(2)),
+          el_click  : clickedElement,
+          user_id   : userId,
+          used_time : '',
+          user_agent : userAgent,
+        };
+
+        fetch("/blog/add/perfom", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie('csrftoken') // jika pakai Django
+          },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(res => console.log("Respon:", res))
+        .catch(err => console.error("Gagal:", err));
     });
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
 
 </script>

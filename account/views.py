@@ -86,33 +86,35 @@ def sign_in(request):
 
         try:
             user = User.objects.get(username=user)
+       
+            # return HttpResponse(0)
+
+            user_auth = authenticate(request, username=user, password=passw)
+            
+            if user_auth is not None and user.is_active is True:
+                login(request, user_auth)
+                # messages.success(request, "login sukses.")
+                return redirect('/')
+                
+                # return HttpResponse(1)
+            
+            elif user_auth is not None:
+                messages.warning(request, "Password tidak cocok.")
+                form = SignIn()
+                # return HttpResponse(2)
+            
+            elif user.is_active is False:
+                messages.warning(request, "Silahkan melakukan aktivasi terlebih dahulu.")
+                # return HttpResponse(3)
+                form = SignIn()
+            else:
+                messages.warning(request, "Password tidak cocok.")
+                form = SignIn()
+                # return HttpResponse(0)
+            
         except User.DoesNotExist:
             messages.error(request, "User tidak dikenali")
             form = SignIn()
-            # return HttpResponse(0)
-
-        user_auth = authenticate(request, username=user, password=passw)
-        
-        if user_auth is not None and user.is_active is True:
-            login(request, user_auth)
-            # messages.success(request, "login sukses.")
-            return redirect('/')
-            
-            # return HttpResponse(1)
-        
-        elif user_auth is not None:
-            messages.warning(request, "Password tidak cocok.")
-            form = SignIn()
-            # return HttpResponse(2)
-        
-        elif user.is_active is False:
-            messages.warning(request, "Silahkan melakukan aktivasi terlebih dahulu.")
-            # return HttpResponse(3)
-            form = SignIn()
-        else:
-            messages.warning(request, "Password tidak cocok.")
-            form = SignIn()
-            # return HttpResponse(0)
     context = {
         'formIn' : SignIn()
     }

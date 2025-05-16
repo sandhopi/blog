@@ -1,4 +1,5 @@
 {% load static %}
+{% load tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -477,7 +478,7 @@
                     <div class="post-item">
                       <img src="assets/img/blog/blog-post-square-1.webp" alt="" class="flex-shrink-0">
                       <div>
-                        <h4><a href="blog-details.html">{{ recent_item.title }}</a></h4>
+                        <h4><a href="/blog/{{ recent_item.id | encode }}">{{ recent_item.title }}</a></h4>
                         <time datetime="2020-01-01">{{ recent_item.created }}</time>
                       </div>
                     </div><!-- End recent post item-->

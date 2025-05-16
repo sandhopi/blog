@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import ContentBlog, Category
+from django.http import HttpResponse, JsonResponse
+from .models import ContentBlog, Category, UrlPerfom
 from django.db.models import Count
 import base64
 from django.contrib import messages
 from .forms import BlogFrom
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 
 def detail(request, id):
@@ -50,5 +52,25 @@ def add_blog(request):
     }
 
     return render(request, "blog/add_article.html", context)
+
+@csrf_exempt
+def add_perfom(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print(data)
+
+        UrlPerfom.objects.create( 
+                                    url             = data['url'], 
+                                    click_element   = data['el_click'],
+                                    scroll_position = data['scroll_pos'],
+                                    used_time       = data['used_time'],
+                                    user_agent      = data['user_agent'],
+                                    see_user_id     = data['user_id'],
+                                )
+        # pengguna = Pengguna(nama=data['nama'], email=data['email'])
+        # pengguna.save()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error'}, status=400)
+
     
     

@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from blog.models import ContentBlog
+from django.http import HttpResponse,JsonResponse
+from blog.models import ContentBlog, Subscriber
 from django.db.models import OuterRef, Subquery
+from django.contrib import messages
 
 
 def index(request):
@@ -67,3 +68,18 @@ def kategori(request):
     }
 
     return render(request, 'beranda/index.html', context)
+
+
+def add_subscriber(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+
+        if email == '':
+            return HttpResponse('Email mohon diinput!')
+        else:
+            Subs = Subscriber.objects.create(
+                    email = email,
+                )
+            Subs.save()
+            return HttpResponse('OK')
+        # return JsonResponse({'status': 'Invalid request'}, status=200)
